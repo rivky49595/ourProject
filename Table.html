@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Tables</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            direction: rtl;
+            text-align: right;
+            margin: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        h2 {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    
+<h2>USER</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Crub</th>
+            <th>כתובת</th>
+            <th>פרמטרים</th>
+            <th>body</th>
+            <th>מה עושה</th>
+            <th>איזה סוגי שגיאות יכולות לחזור</th>
+            <th>שדות חובה</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Post</td>
+            <td>Users/</td>
+            <td>-</td>
+            <td>Username, password, email, phone</td>
+            <td>יוצר משתמש חדש</td>
+            <td>400 (חסר שדות חובה), 409 (שם משתמש קיים), 400 (שגיאה כללית)</td>
+            <td>Username, password, email, phone</td>
+        </tr>
+        <tr>
+            <td>Get</td>
+            <td>Users/:id</td>
+            <td>id</td>
+            <td>-</td>
+            <td>מחזיר מידע על משתמש לפי id</td>
+            <td>404 (משתמש לא נמצא), 400 (שגיאה כללית)</td>
+            <td>id (ב-URL)</td>
+        </tr>
+        <tr>
+            <td>Get</td>
+            <td>Users/</td>
+            <td>-</td>
+            <td>-</td>
+            <td>מחזיר את כל המשתמשים</td>
+            <td>400 (שגיאה כללית)</td>
+            <td>-</td>
+        </tr>
+        <tr>
+            <td>Put</td>
+            <td>Users/:id</td>
+            <td>id</td>
+            <td>username, email, role</td>
+            <td>מעדכן את פרטי המשתמש(לא כולל סיסמה)</td>
+            <td>404 (משתמש לא נמצא), 400 (שגיאה כללית)</td>
+            <td>id (ב-URL)</td>
+        </tr>
+        <tr>
+            <td>Put</td>
+            <td>Users/:id/password</td>
+            <td>id</td>
+            <td>oldPassword, newPassword, WebsiteRegistrationDate</td>
+            <td>מעדכן סיסמה חדשה</td>
+            <td>404 (משתמש לא נמצא), 401 (סיסמה ישנה שגויה), 400 (שגיאה כללית)</td>
+            <td>id (ב-URL), oldPassword, newPassword</td>
+        </tr>
+        <tr>
+            <td>Post</td>
+            <td>Users/login</td>
+            <td>-</td>
+            <td>Username, password</td>
+            <td>מתחבר למערכת</td>
+            <td>404 (משתמש לא נמצא), 401 (שם משתמש או סיסמה שגויים), 400 (שגיאה כללית)</td>
+            <td>Username, password</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>PRODUCT</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Crub</th>
+            <th>כתובת</th>
+            <th>פרמטרים</th>
+            <th>body</th>
+            <th>מה עושה</th>
+            <th>איזה סוגי שגיאות יכולות לחזור</th>
+            <th>שדות חובה</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>post</td>
+            <td>Products/</td>
+            <td>-</td>
+            <td>productName, Description, productCreationDate, imageUrl, price, categories, stock, material, dimensions</td>
+            <td>יוצר מוצר חדש</td>
+            <td>400 - חסרים שדות חובה, 400 - קטגוריות לא תקינות, 400 - שגיאה כללית</td>
+            <td>productName, Description, price, categories</td>
+        </tr>
+        <tr>
+            <td>get</td>
+            <td>Products/</td>
+            <td>-</td>
+            <td>-</td>
+            <td>מחזיר את כל המוצרים</td>
+            <td>400 - שגיאה כללית</td>
+            <td>-</td>
+        </tr>
+        <tr>
+            <td>get</td>
+            <td>Products/:id/</td>
+            <td>id</td>
+            <td>-</td>
+            <td>מחזיר מוצר לפי id</td>
+            <td>404 - מוצר לא נמצא, 400 - שגיאה כללית</td>
+            <td>-</td>
+        </tr>
+        <tr>
+            <td>put</td>
+            <td>Products/:id/</td>
+            <td>id</td>
+            <td>productName, Description, productCreationDate, imageUrl, price, categories, stock, material, dimensions</td>
+            <td>מעדכן פרטי מוצר קיים</td>
+            <td>400 - חסרים שדות חובה, 400 - קטגוריות לא תקינות, 404 - מוצר לא נמצא, 400 - שגיאה כללית</td>
+            <td>לפחות אחד מהשדות לעדכון</td>
+        </tr>
+        <tr>
+            <td>delete</td>
+            <td>Products/:id/</td>
+            <td>id</td>
+            <td>-</td>
+            <td>מוחק מוצר לפי מזהה</td>
+            <td>404 - מוצר לא נמצא, 400 - שגיאה כללית</td>
+            <td>-</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>ORDERS</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Crub</th>
+            <th>כתובת</th>
+            <th>פרמטרים</th>
+            <th>body</th>
+            <th>מה עושה</th>
+            <th>איזה סוגי שגיאות יכולות לחזור</th>
+            <th>שדות חובה</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>get</td>
+            <td>Orders/</td>
+            <td>-</td>
+            <td>-</td>
+            <td>מחזיר את כל ההזמנות</td>
+            <td>400 (שגיאה כללית)</td>
+            <td>-</td>
+        </tr>
+        <tr>
+            <td>get</td>
+            <td>Orders/:customerId</td>
+            <td>customerId</td>
+            <td>-</td>
+            <td>מחזיר את כל ההזמנות של משתמש מסוים</td>
+            <td>404 (משתמש לא נמצא), 404 (לא נמצאו הזמנות), 400 (שגיאה כללית)</td>
+            <td>customerId (ב-URL)</td>
+        </tr>
+        <tr>
+            <td>post</td>
+            <td>Orders/</td>
+            <td>-</td>
+            <td>dueDate, shippingAddress, customerId, products, shippingPrice, totalPrice</td>
+            <td>יוצר הזמנה חדשה</td>
+            <td>400 (חסר שדות חובה), 400 (כמות מוצר לא תקינה), 400 (מחירים לא תקינים), 400 (משתמש לא קיים), 400 (מוצר לא קיים)</td>
+            <td>כל השדות בטור body</td>
+        </tr>
+        <tr>
+            <td>delete</td>
+            <td>Orders/:id/</td>
+            <td>id</td>
+            <td>-</td>
+            <td>מוחק הזמנה לפי ID אם לא נשלחה</td>
+            <td>404 (הזמנה לא נמצאה), 400 (ההזמנה כבר נשלחה ואי אפשר למחוק אותה), 400 (שגיאה כללית)</td>
+            <td>id (ב-URL)</td>
+        </tr>
+        <tr>
+            <td>put</td>
+            <td>Orders/:id/</td>
+            <td>id</td>
+            <td>-</td>
+            <td>מסמן הזמנה כ"נשלחה" אם לא נשלחה עדיין</td>
+            <td>404 (הזמנה לא נמצאה), 400 (ההזמנה כבר נשלחה), 400 (שגיאה כללית)</td>
+            <td>id (ב-URL)</td>
+        </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
