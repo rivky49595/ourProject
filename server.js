@@ -4,13 +4,18 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import productRouter from './Routers/product.js';
 import orderRouter from './Routers/order.js';
-import userRouter from './Routers/user.js'
+import userRouter from './Routers/user.js';
 
-dotenv.config();
+dotenv.config(); // טוען את משתני הסביבה מקובץ .env
 const app = express();
 
 // חיבור למסד נתונים של MongoDB
-mongoose.connect(process.env.DB_URL)
+if (!process.env.DB_URL_ATLAS) {
+  console.error("MongoDB URI is missing!");
+  process.exit(1); // יציאה במקרה שאין URI
+}
+
+mongoose.connect(process.env.DB_URL_ATLAS)
   .then(() => {
     console.log("MongoDB connected successfully!");
   })
@@ -27,7 +32,6 @@ app.use(express.json());
 app.use('/products', productRouter);
 app.use('/orders', orderRouter);
 app.use('/users', userRouter);
-
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
